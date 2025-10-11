@@ -2,7 +2,7 @@ import React from "react";
 
 function ExForm() {
   return (
-    <div className="max-w-md mx-auto mt-10 bg-white dark:bg-gray-900 shadow-lg rounded-2xl p-6">
+    <div className="max-w-md   bg-white dark:bg-gray-800 shadow-lg rounded-2xl p-6 ">
       <h2 className="text-2xl font-semibold text-gray-800 dark:text-gray-100 mb-6 text-center">
         Add New Expense
       </h2>

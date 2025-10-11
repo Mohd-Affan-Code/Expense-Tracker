@@ -32,7 +32,7 @@ function ExTabs() {
           key={index}
           className="flex items-center gap-4 bg-white dark:bg-gray-800 rounded-2xl shadow-md p-4 hover:shadow-lg transition-all cursor-pointer w-full sm:w-1/3"
         >
-          <div className="p-3 bg-gray-100 dark:bg-gray-700 rounded-xl">
+          <div className="p-3 bg-gray-200 dark:bg-gray-700 rounded-xl">
             {tab.icon}
           </div>
           <div>

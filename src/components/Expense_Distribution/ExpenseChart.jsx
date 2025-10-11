@@ -1,50 +1,51 @@
-import React from "react";
-import {
-  PieChart,
-  Pie,
-  Tooltip,
-  Cell,
-  Legend,
-  ResponsiveContainer,
-} from "recharts";
-
-const data = [
-  { name: "Food", value: 400 },
-  { name: "Travel", value: 300 },
-  { name: "Shopping", value: 300 },
-  { name: "Bills", value: 200 },
-  { name: "Others", value: 100 },
-];
-
-const COLORS = ["#22c55e", "#3b82f6", "#ef4444", "#f59e0b", "#8b5cf6"];
+import React, { useState } from "react";
+import MyPieChart from "./PieChart";
+import MyLineChart from "./LIneChart";
+import { VscPieChart } from "react-icons/vsc";
+import { BsBarChartFill } from "react-icons/bs";
 
 function ExpenseChart() {
-  return (
-    <div className="w-full h-96 p-4 bg-white rounded-xl shadow">
-      <h2 className="text-xl font-semibold mb-4">Expense Distribution</h2>
+  const [activeChart, setActiveChart] = useState("pie"); // default pie chart
 
-      <ResponsiveContainer width="100%" height="80%">
-        <PieChart>
-          <Pie
-            data={data}
-            dataKey="value"
-            nameKey="name"
-            cx="50%"
-            cy="50%"
-            outerRadius={120}
-            label
-          >
-            {data.map((entry, index) => (
-              <Cell
-                key={`cell-${index}`}
-                fill={COLORS[index % COLORS.length]}
-              />
-            ))}
-          </Pie>
-          <Tooltip />
-          <Legend />
-        </PieChart>
-      </ResponsiveContainer>
+  return (
+    <div className=" p-5 shadow-lg bg-white dark:bg-gray-800 rounded-2xl transition-colors duration-300">
+      <h2 className="text-2xl text-gray-900 dark:text-white font-semibold text-center">
+        Expense Analytics
+      </h2>
+
+      {/* Buttons */}
+      <div className="flex justify-center gap-8 mt-6">
+        <button
+          onClick={() => setActiveChart("pie")}
+          className={`flex items-center gap-2 px-4 py-2 rounded-xl transition-all duration-300
+            ${
+              activeChart === "pie"
+                ? "bg-blue-600 text-white shadow-md"
+                : "bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600"
+            }`}
+        >
+          <VscPieChart className="text-lg" />
+          <span>Pie Chart</span>
+        </button>
+
+        <button
+          onClick={() => setActiveChart("line")}
+          className={`flex items-center gap-2 px-4 py-2 rounded-xl transition-all duration-300
+            ${
+              activeChart === "line"
+                ? "bg-green-600 text-white shadow-md"
+                : "bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600"
+            }`}
+        >
+          <BsBarChartFill className="text-lg" />
+          <span>Line Chart</span>
+        </button>
+      </div>
+
+      {/* Chart Display */}
+      <div className="mt-8">
+        {activeChart === "pie" ? <MyPieChart /> : <MyLineChart />}
+      </div>
     </div>
   );
 }
