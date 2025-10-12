@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { MdDelete } from "react-icons/md";
 import { CiStickyNote } from "react-icons/ci";
+import { ExpenseContext } from "../context/ExpenseContext";
 
 function ExHistory() {
+  const { formData } = useContext(ExpenseContext);
+  console.log(formData);
   return (
     <div className="p-6 bg-gray-100 dark:bg-gray-800 max-h-full  rounded-2xl mt-10">
       {/* Header */}
@@ -49,50 +52,33 @@ function ExHistory() {
             </tr>
           </thead>
           <tbody>
-            <tr className="m-0.5 rounded-2xl dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700 transition">
-              <td className="py-3 px-4 text-gray-700 dark:text-gray-300">
-                Oct 13, 2025
-              </td>
-              <td className="py-3 px-4 text-gray-700 dark:text-gray-300">
-                Avenger
-              </td>
-              <td className="py-3 px-4 text-gray-700 dark:text-gray-300">
-                Movie
-              </td>
-              <td className="py-3 px-4 font-semibold text-green-600 dark:text-green-400">
-                $300
-              </td>
-              <td className="py-3 px-4 flex items-center gap-3">
-                <button className="text-red-500 hover:text-red-700 transition">
-                  <MdDelete size={22} />
-                </button>
-                <button className="text-blue-500 hover:text-blue-700 transition">
-                  <CiStickyNote size={22} />
-                </button>
-              </td>
-            </tr>
-            <tr className="m-0.5 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700 transition">
-              <td className="py-3 px-4 text-gray-700 dark:text-gray-300">
-                Oct 13, 2025
-              </td>
-              <td className="py-3 px-4 text-gray-700 dark:text-gray-300">
-                Avenger
-              </td>
-              <td className="py-3 px-4 text-gray-700 dark:text-gray-300">
-                Movie
-              </td>
-              <td className="py-3 px-4 font-semibold text-green-600 dark:text-green-400">
-                $300
-              </td>
-              <td className="py-3 px-4 flex items-center gap-3">
-                <button className="text-red-500 hover:text-red-700 transition">
-                  <MdDelete size={22} />
-                </button>
-                <button className="text-blue-500 hover:text-blue-700 transition">
-                  <CiStickyNote size={22} />
-                </button>
-              </td>
-            </tr>
+            {formData.map((item, index) => (
+              <tr
+                key={index}
+                className="m-0.5 rounded-2xl dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700 transition"
+              >
+                <td className="py-3 px-4 text-gray-700 dark:text-gray-300">
+                  {item.date}
+                </td>
+                <td className="py-3 px-4 text-gray-700 dark:text-gray-300">
+                  {item.name}
+                </td>
+                <td className="py-3 px-4 text-gray-700 dark:text-gray-300">
+                  {item.category}
+                </td>
+                <td className="py-3 px-4 font-semibold text-green-600 dark:text-green-400">
+                  ${item.amount}
+                </td>
+                <td className="py-3 px-4 flex items-center gap-3">
+                  <button className="text-red-500 hover:text-red-700 transition">
+                    <MdDelete size={22} />
+                  </button>
+                  <button className="text-blue-500 hover:text-blue-700 transition">
+                    <CiStickyNote size={22} />
+                  </button>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>

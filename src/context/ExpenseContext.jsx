@@ -1,11 +1,18 @@
-import { createContext } from "react";
+import { createContext, useState } from "react";
 
 export const ExpenseContext = createContext();
 
 const initialState = {};
 
 function ExpenseProvider({ children }) {
-  return <ExpenseContext.Provider>{children}</ExpenseContext.Provider>;
+  const [formData, setFormData] = useState([]);
+  console.log(formData);
+  let name = "affan";
+  return (
+    <ExpenseContext.Provider value={{ setFormData, formData }}>
+      {children}
+    </ExpenseContext.Provider>
+  );
 }
 
 export default ExpenseProvider;

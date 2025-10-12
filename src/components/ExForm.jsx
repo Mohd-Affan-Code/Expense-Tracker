@@ -1,25 +1,50 @@
-import React from "react";
+import React, { useContext, useState } from "react";
+import { ExpenseContext } from "../context/ExpenseContext";
 
 function ExForm() {
+  const { setFormData } = useContext(ExpenseContext);
+  const [inputData, setInputData] = useState({
+    name: "",
+    amount: "",
+    category: "shopping",
+    date: new Date().toISOString().split("T")[0],
+  });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setInputData({
+      name: "",
+      amount: "",
+      category: "shopping",
+      date: new Date().toISOString().split("T")[0],
+    });
+    setFormData((prev) => [...prev, inputData]);
+  };
+
+  const handleChange = (e) => {
+    setInputData({ ...inputData, [e.target.name]: e.target.value });
+  };
   return (
     <div className="max-w-md   bg-white dark:bg-gray-800 shadow-lg rounded-2xl p-6 ">
       <h2 className="text-2xl font-semibold text-gray-800 dark:text-gray-100 mb-6 text-center">
         Add New Expense
       </h2>
 
-      <form className="space-y-4">
+      <form onSubmit={handleSubmit} className="space-y-4">
         {/* Description */}
         <div className="flex flex-col">
           <label
-            htmlFor="description"
+            htmlFor="name"
             className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
           >
             Description
           </label>
           <input
             type="text"
-            id="description"
-            name="description"
+            id="name"
+            name="name"
+            value={inputData.name}
+            onChange={handleChange}
             placeholder="Enter expense description"
             className="border border-gray-300 dark:border-gray-700 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:text-white"
           />
@@ -37,6 +62,8 @@ function ExForm() {
             type="number"
             id="amount"
             name="amount"
+            value={inputData.amount}
+            onChange={handleChange}
             placeholder="Enter amount"
             className="border border-gray-300 dark:border-gray-700 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:text-white"
           />
@@ -53,7 +80,8 @@ function ExForm() {
           <select
             id="category"
             name="category"
-            defaultValue="shopping"
+            value={inputData.category}
+            onChange={handleChange}
             className="border border-gray-300 dark:border-gray-700 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:text-white"
           >
             <option value="shopping">Shopping</option>
@@ -75,7 +103,8 @@ function ExForm() {
             type="date"
             id="date"
             name="date"
-            defaultValue={new Date().toISOString().split("T")[0]}
+            value={inputData.date}
+            onChange={handleChange}
             className="border border-gray-300 dark:border-gray-700 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:text-white"
           />
         </div>
@@ -83,7 +112,7 @@ function ExForm() {
         {/* Submit Button */}
         <button
           type="submit"
-          className="w-full bg-blue-600 text-white py-2 rounded-lg font-medium hover:bg-blue-700 transition duration-200"
+          className="w-full bg-blue-600 text-white py-2 rounded-lg font-medium hover:bg-blue-700 transition duration-200 cursor-pointer"
         >
           Add Expense
         </button>
