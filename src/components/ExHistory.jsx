@@ -4,7 +4,7 @@ import { CiStickyNote } from "react-icons/ci";
 import { ExpenseContext } from "../context/ExpenseContext";
 
 function ExHistory() {
-  const { formData } = useContext(ExpenseContext);
+  const { formData, deleteExpense, updateExpense } = useContext(ExpenseContext);
   console.log(formData);
   return (
     <div className="p-6 bg-gray-100 dark:bg-gray-800 max-h-full  rounded-2xl mt-10">
@@ -70,12 +70,15 @@ function ExHistory() {
                   ${item.amount}
                 </td>
                 <td className="py-3 px-4 flex items-center gap-3">
-                  <button className="text-red-500 hover:text-red-700 transition">
+                  <button
+                    onClick={() => deleteExpense(index)}
+                    className="text-red-500 hover:text-red-700 transition"
+                  >
                     <MdDelete size={22} />
                   </button>
-                  <button className="text-blue-500 hover:text-blue-700 transition">
+                  {/* <button onClick={() => } className="text-blue-500 hover:text-blue-700 transition">
                     <CiStickyNote size={22} />
-                  </button>
+                  </button> */}
                 </td>
               </tr>
             ))}
