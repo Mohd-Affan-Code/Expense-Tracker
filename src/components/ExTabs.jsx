@@ -1,27 +1,38 @@
-import React from "react";
+import React, { useContext } from "react";
 import { FaWallet } from "react-icons/fa";
 import { PiChartLineDownLight, PiChartLineUpLight } from "react-icons/pi";
+import { ExpenseContext } from "../context/ExpenseContext";
 
 function ExTabs() {
+  const { formData, maxCategory, maxAmount } = useContext(ExpenseContext);
+
+  const entries = formData.length;
+
+  let capitalized = maxCategory.charAt(0).toUpperCase() + maxCategory.slice(1);
+
+  const totalExpense = formData.reduce(
+    (acc, curr) => acc + Number(curr.amount),
+    0
+  );
   const tabs = [
     {
       icon: <FaWallet className="text-indigo-500 text-3xl" />,
       title: "Total Expenses",
-      value: "$3000",
+      value: `$${totalExpense}`,
     },
     {
       icon: <PiChartLineUpLight className="text-green-500 text-3xl" />,
       title: "Highest Category",
       value: (
         <>
-          Shopping <span className="text-gray-500">($300)</span>
+          {capitalized} <span className="text-gray-500">(${maxAmount})</span>
         </>
       ),
     },
     {
       icon: <PiChartLineDownLight className="text-red-500 text-3xl" />,
       title: "Total Entries",
-      value: "7",
+      value: entries,
     },
   ];
 
