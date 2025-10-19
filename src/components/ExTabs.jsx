@@ -4,11 +4,18 @@ import { PiChartLineDownLight, PiChartLineUpLight } from "react-icons/pi";
 import { ExpenseContext } from "../context/ExpenseContext";
 
 function ExTabs() {
-  const { formData, maxCategory, maxAmount } = useContext(ExpenseContext);
+  const {
+    formData = [],
+    maxCategory = "",
+    maxAmount = [],
+  } = useContext(ExpenseContext) || {};
 
   const entries = formData.length;
 
-  let capitalized = maxCategory.charAt(0).toUpperCase() + maxCategory.slice(1);
+  const capitalized =
+    maxCategory && typeof maxCategory === "string"
+      ? maxCategory.charAt(0).toUpperCase() + maxCategory.slice(1)
+      : "N/A";
 
   const totalExpense = formData.reduce(
     (acc, curr) => acc + Number(curr.amount),
@@ -25,7 +32,8 @@ function ExTabs() {
       title: "Highest Category",
       value: (
         <>
-          {capitalized} <span className="text-gray-500">(${maxAmount})</span>
+          {capitalized || "0"}{" "}
+          <span className="text-gray-500">(${maxAmount})</span>
         </>
       ),
     },

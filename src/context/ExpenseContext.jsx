@@ -2,17 +2,13 @@ import { createContext, useEffect, useReducer, useState } from "react";
 
 export const ExpenseContext = createContext();
 
-const initialState = {};
-function expenseReducer(state, action) {}
-
 function ExpenseProvider({ children }) {
-  const [state, dispatch] = useReducer(expenseReducer, initialState);
-
   const [formData, setFormData] = useState(() => {
     const savedData = localStorage.getItem("formContent");
     return savedData ? JSON.parse(savedData) : [];
   });
 
+  console.log(formData);
   const totals = formData.reduce((acc, item) => {
     const cat = item.category;
     const amt = Number(item.amount); // string ko number me badla
@@ -20,7 +16,16 @@ function ExpenseProvider({ children }) {
     return acc;
   }, {});
 
-  // 2️⃣ Ab sabse zyada amount wali category nikalte hain
+  console.log(totals);
+
+  const categoryData = Object.entries(totals).map(([category, total]) => ({
+    category,
+    total,
+  }));
+
+  console.log(categoryData);
+
+  // Ab sabse zyada amount wali category nikalte hain
   let maxCategory = null;
   let maxAmount = 0;
 
@@ -30,8 +35,6 @@ function ExpenseProvider({ children }) {
       maxCategory = category;
     }
   }
-
-  console.log("Sabse zyada kharch wali category:", maxCategory);
 
   // Delete Expense
   const deleteExpense = (id) => {
@@ -61,6 +64,7 @@ function ExpenseProvider({ children }) {
         updateExpense,
         maxCategory,
         maxAmount,
+        categoryData,
       }}
     >
       {children}

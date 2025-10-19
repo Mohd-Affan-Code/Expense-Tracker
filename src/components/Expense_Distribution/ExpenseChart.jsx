@@ -1,8 +1,9 @@
-import React, { useState } from "react";
-import MyPieChart from "./PieChart";
-import MyLineChart from "./LIneChart";
+import React, { useState, lazy, Suspense } from "react";
 import { VscPieChart } from "react-icons/vsc";
 import { BsBarChartFill } from "react-icons/bs";
+
+const MyPieChart = lazy(() => import("./PieChart"));
+const MyLineChart = lazy(() => import("./LIneChart"));
 
 function ExpenseChart() {
   const [activeChart, setActiveChart] = useState("pie"); // default pie chart
@@ -42,9 +43,17 @@ function ExpenseChart() {
         </button>
       </div>
 
-      {/* Chart Display */}
-      <div className="mt-8">
-        {activeChart === "pie" ? <MyPieChart /> : <MyLineChart />}
+      {/* Chart Display with Lazy Loading */}
+      <div className="mt-8 min-h-[300px] flex justify-center items-center">
+        <Suspense
+          fallback={
+            <div className="animate-spin text-gray-500 text-lg">
+              Loading chart...
+            </div>
+          }
+        >
+          {activeChart === "pie" ? <MyPieChart /> : <MyLineChart />}
+        </Suspense>
       </div>
     </div>
   );

@@ -5,7 +5,7 @@ import { ExpenseContext } from "../context/ExpenseContext";
 
 function ExHistory() {
   const { formData, deleteExpense, updateExpense } = useContext(ExpenseContext);
-  console.log(formData);
+
   return (
     <div className="p-6 bg-gray-100 dark:bg-gray-800 max-h-full  rounded-2xl mt-10">
       {/* Header */}
