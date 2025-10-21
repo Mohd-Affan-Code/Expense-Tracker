@@ -1,10 +1,23 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { MdDelete } from "react-icons/md";
 import { CiStickyNote } from "react-icons/ci";
 import { ExpenseContext } from "../context/ExpenseContext";
 
 function ExHistory() {
-  const { formData, deleteExpense, updateExpense } = useContext(ExpenseContext);
+  const { formData, deleteExpense } = useContext(ExpenseContext);
+  const [selectCategory, setSelectCategory] = useState("All");
+  const [searchCategory, setSearchCategory] = useState("");
+
+  const filterCategoryData = formData.filter((item) => {
+    const categoryMatch =
+      selectCategory === "All" || item.category === selectCategory;
+
+    const searchMatch = item.name
+      .toLowerCase()
+      .includes(searchCategory.toLowerCase());
+
+    return categoryMatch && searchMatch;
+  });
 
   return (
     <div className="p-6 bg-gray-100 dark:bg-gray-800 max-h-full  rounded-2xl mt-10">
@@ -19,7 +32,9 @@ function ExHistory() {
         <select
           id="category"
           name="category"
-          defaultValue="All"
+          // defaultValue="All"
+          value={selectCategory}
+          onChange={(e) => setSelectCategory(e.target.value)}
           className="w-full md:w-1/3 border border-gray-300 dark:border-gray-700 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:text-white"
         >
           <option value="All">All</option>
@@ -34,6 +49,8 @@ function ExHistory() {
           type="text"
           name="search-item"
           id="search-item"
+          value={searchCategory}
+          onChange={(e) => setSearchCategory(e.target.value)}
           placeholder="Search product..."
           className="w-full md:w-1/3 border border-gray-300 dark:border-gray-700 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:text-white"
         />
@@ -52,7 +69,7 @@ function ExHistory() {
             </tr>
           </thead>
           <tbody>
-            {formData.map((item, index) => (
+            {filterCategoryData.map((item, index) => (
               <tr
                 key={index}
                 className="m-0.5 rounded-2xl dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700 transition"

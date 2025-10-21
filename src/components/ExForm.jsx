@@ -43,8 +43,10 @@ function ExForm() {
             type="text"
             id="name"
             name="name"
+            autoComplete="off"
             value={inputData.name}
             onChange={handleChange}
+            required
             placeholder="Enter expense description"
             className="border border-gray-300 dark:border-gray-700 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:text-white"
           />
@@ -62,6 +64,7 @@ function ExForm() {
             type="number"
             id="amount"
             name="amount"
+            required
             value={inputData.amount}
             onChange={handleChange}
             placeholder="Enter amount"
