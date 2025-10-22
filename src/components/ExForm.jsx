@@ -6,7 +6,7 @@ function ExForm() {
   const [inputData, setInputData] = useState({
     name: "",
     amount: "",
-    category: "shopping",
+    category: "Shopping",
     date: new Date().toISOString().split("T")[0],
   });
 
@@ -15,7 +15,7 @@ function ExForm() {
     setInputData({
       name: "",
       amount: "",
-      category: "shopping",
+      category: "Shopping",
       date: new Date().toISOString().split("T")[0],
     });
     setFormData((prev) => [...prev, inputData]);
@@ -87,10 +87,10 @@ function ExForm() {
             onChange={handleChange}
             className="border border-gray-300 dark:border-gray-700 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:text-white"
           >
-            <option value="shopping">Shopping</option>
-            <option value="food">Food</option>
-            <option value="entertainment">Entertainment</option>
-            <option value="utilities">Utilities</option>
+            <option value="Shopping">Shopping</option>
+            <option value="Food">Food</option>
+            <option value="Entertainment">Entertainment</option>
+            <option value="Utilities">Utilities</option>
           </select>
         </div>
 

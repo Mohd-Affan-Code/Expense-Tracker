@@ -1,31 +1,48 @@
-import { createContext, useEffect, useReducer, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 export const ExpenseContext = createContext();
 
 function ExpenseProvider({ children }) {
+  // ✅ Default Expenses (ye pehle se show honge)
+  const defaultExpenses = [
+    { name: "Groceries", amount: 1500, category: "Food", date: "2025-10-01" },
+    {
+      name: "Electricity Bill",
+      amount: 1200,
+      category: "Utilities",
+      date: "2025-10-05",
+    },
+    {
+      name: "Club Membership",
+      amount: 800,
+      category: "Entertainment",
+      date: "2025-10-10",
+    },
+  ];
+
   const [formData, setFormData] = useState(() => {
     const savedData = localStorage.getItem("formContent");
-    return savedData ? JSON.parse(savedData) : [];
+    // if (savedData == []) {
+    //   !savedData;
+    // }
+    // Agar data pehli baar load ho raha hai to defaultExpenses set kar do
+    return savedData ? JSON.parse(savedData) : defaultExpenses;
   });
 
-  console.log(formData);
+  // Totals calculate karna
   const totals = formData.reduce((acc, item) => {
     const cat = item.category;
-    const amt = Number(item.amount); // string ko number me badla
+    const amt = Number(item.amount);
     acc[cat] = (acc[cat] || 0) + amt;
     return acc;
   }, {});
-
-  console.log(totals);
 
   const categoryData = Object.entries(totals).map(([category, total]) => ({
     category,
     total,
   }));
 
-  console.log(categoryData);
-
-  // Ab sabse zyada amount wali category nikalte hain
+  // Sabse zyada kharch wali category
   let maxCategory = null;
   let maxAmount = 0;
 
@@ -38,19 +55,10 @@ function ExpenseProvider({ children }) {
 
   // Delete Expense
   const deleteExpense = (id) => {
-    setFormData((prev) => prev.filter((item, index) => index !== id));
+    setFormData((prev) => prev.filter((_, index) => index !== id));
   };
 
-  // Update Expense
-  const updateExpense = (id, updatedData) => {
-    setFormData((prev) =>
-      prev.map((item, index) =>
-        index === id ? { ...item, ...updatedData } : item
-      )
-    );
-  };
-
-  // Set localStorage Data
+  // LocalStorage Sync
   useEffect(() => {
     localStorage.setItem("formContent", JSON.stringify(formData));
   }, [formData]);
@@ -61,7 +69,6 @@ function ExpenseProvider({ children }) {
         setFormData,
         formData,
         deleteExpense,
-        updateExpense,
         maxCategory,
         maxAmount,
         categoryData,

@@ -38,10 +38,10 @@ function ExHistory() {
           className="w-full md:w-1/3 border border-gray-300 dark:border-gray-700 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:text-white"
         >
           <option value="All">All</option>
-          <option value="shopping">Shopping</option>
-          <option value="food">Food</option>
-          <option value="entertainment">Entertainment</option>
-          <option value="utilities">Utilities</option>
+          <option value="Shopping">Shopping</option>
+          <option value="Food">Food</option>
+          <option value="Entertainment">Entertainment</option>
+          <option value="Utilities">Utilities</option>
         </select>
 
         {/* Search Input */}
