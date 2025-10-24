@@ -1,16 +1,38 @@
-# React + Vite
+# 💰 Expense Tracker
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern and interactive **Expense Tracker Web App** built using **React** and **Tailwind CSS**, designed to help you easily track your daily expenses, analyze spending habits, and manage your budget efficiently.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ✨ Features
 
-## React Compiler
+- 🧾 **Add Daily Expenses** – Effortlessly add and categorize your daily expenses.
+- 📊 **Pie Chart Visualization** – Get a visual breakdown of your spending by category.
+- 💵 **Total Expense Overview** – See your total expenditure at a glance on the top tab.
+- 🏷️ **Highest Spending Category** – Instantly view which category you spend the most on.
+- 📦 **Total Items Tab** – Displays total number of expense entries you’ve added.
+- 🌗 **Responsive & Modern UI** – Built with Tailwind CSS for a clean and responsive design.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 🖼️ Screenshots
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### 🏠 Dashboard View
+
+![Dashboard Screenshot](./public/ScreenShot/ExpenseTracker.png)
+
+## 🛠️ Tech Stack
+
+- ⚛️ **React.js** – Frontend library
+- 🎨 **Tailwind CSS** – Styling and layout
+- 📈 **Chart.js / Recharts** – For Pie chart visualization
+- 💾 **Local Storage / Context API** – For managing expense data
+
+---
+
+## 🚀 How to Run Locally
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/Mohd-Affan-Code/Expense-Tracker.git
+   ```
